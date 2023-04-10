@@ -22,7 +22,15 @@ final _routes = GoRouter(
     ),
     GoRoute(
       path: '/verification',
-      builder: (context, state) => const VerificationPage(),
+      builder: (context, state) {
+        final params = state.extra as VerificationPageParams?;
+
+        if (params == null) {
+          throw 'Missing `VerificationPageParams` object';
+        }
+
+        return VerificationPage(params: params);
+      },
     ),
   ],
 );

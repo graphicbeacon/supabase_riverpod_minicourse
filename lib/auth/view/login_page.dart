@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:memories_app/auth/auth.dart';
+import 'package:memories_app/core/core.dart';
+import 'package:memories_app/onboarding/onboarding.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -18,9 +21,59 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _passwordCtrl = TextEditingController();
   final _usernameCtrl = TextEditingController();
 
-  Future<void> _login() async {}
+  Future<void> _login() async {
+    try {
+      setState(() {
+        _isSubmitting = true;
+      });
 
-  Future<void> _createAccount() async {}
+      await ref.read(authRepositoryProvider).logIn(
+            email: _emailCtrl.text,
+            password: _passwordCtrl.text,
+          );
+
+      if (mounted) {
+        context.pop();
+      }
+    } catch (e) {
+      setState(() {
+        _isSubmitting = false;
+      });
+
+      context.showAlert(e.toString());
+    }
+  }
+
+  Future<void> _createAccount() async {
+    try {
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      await ref.read(onboardingRepositoryProvider).signUp(
+            email: _emailCtrl.text,
+            password: _passwordCtrl.text,
+            username: _usernameCtrl.text,
+          );
+
+      if (mounted) {
+        context.push(
+          '/verification',
+          extra: VerificationPageParams(
+            email: _emailCtrl.text,
+            password: _passwordCtrl.text,
+            username: _usernameCtrl.text,
+          ),
+        );
+      }
+    } catch (e) {
+      context.showAlert(e.toString());
+    }
+
+    setState(() {
+      _isSubmitting = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +126,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: _isSubmitting ? null : () {},
+                  onPressed: _isSubmitting
+                      ? null
+                      : () {
+                          if (_formKey.currentState!.validate()) {
+                            _login();
+                          } else {
+                            setState(() {
+                              _autovalidateMode = AutovalidateMode.always;
+                            });
+                          }
+                        },
                   child: const Text('Submit'),
                 ),
               ),
@@ -95,7 +158,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   onPressed: _isSubmitting
                       ? null
                       : () {
-                          context.push('/verification');
+                          if (_formKey.currentState!.validate()) {
+                            _createAccount();
+                          } else {
+                            setState(() {
+                              _autovalidateMode = AutovalidateMode.always;
+                            });
+                          }
                         },
                   child: const Text('or Create an Account'),
                 ),
