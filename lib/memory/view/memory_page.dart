@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:memories_app/auth/auth.dart';
+import 'package:memories_app/core/core.dart';
+import 'package:memories_app/memory/memory.dart';
 
 class MemoryPage extends ConsumerWidget {
   const MemoryPage({super.key});
@@ -26,6 +28,9 @@ class MemoryPage extends ConsumerWidget {
         height: double.infinity,
         child: Stack(
           children: [
+            const Positioned.fill(
+              child: MemoryListView(),
+            ),
             if (user == null)
               Positioned(
                 bottom: 20,
@@ -44,7 +49,14 @@ class MemoryPage extends ConsumerWidget {
       floatingActionButton: user == null
           ? null
           : FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                context.showBottomSheet(
+                  child: const Padding(
+                    padding: EdgeInsets.all(20),
+                    child: MemoryItemForm(),
+                  ),
+                );
+              },
               child: const Icon(Icons.add),
             ),
     );
