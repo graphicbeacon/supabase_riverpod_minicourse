@@ -1,16 +1,15 @@
 # memories_app
 
-A realtime photo sharing app built on Supabase.
+A realtime photo sharing app built on Supabase and Riverpod.
 
-## Getting Started
+[Supabase](https://supabase.io) is an open-source Firebase alternative that offers a set of tools to create scalable and secure web and mobile applications. 
 
-This project is a starting point for a Flutter application.
+On the other hand, [Riverpod](https://docs-v2.riverpod.dev/) is a state management library for Flutter that provides a simple, composable way of managing application state. It uses dependency injection to enable sharing state across the app and offers an intuitive API for managing state.
 
-A few resources to get you started if this is your first Flutter project:
+## Getting started
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Install [Flutter](https://docs.flutter.dev/get-started/install) (_Includes Dart SDK_)
+2. Update packages with `flutter pub get`
+3. Run project with `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+_**Please note:** This is the "starter" branch for the Supabase & Riverpod free minicourse on YouTube. Checkout the "main" branch for the complete solution._
