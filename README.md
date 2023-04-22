@@ -9,7 +9,8 @@ On the other hand, [Riverpod](https://docs-v2.riverpod.dev/) is a state manageme
 ## Getting started
 
 1. Install [Flutter](https://docs.flutter.dev/get-started/install) (_Includes Dart SDK_)
-2. Update packages with `flutter pub get`
-3. Run project with `flutter run`
+2. Setup and Configure your Supabase project (See the mini course)
+3. Update packages with `flutter pub get`
+4. Run project with `flutter run`
 
-_**Please note:** This is the "starter" branch for the Supabase & Riverpod free minicourse on YouTube. Checkout the "main" branch for the complete solution._
+_**Please note:** This is the "main" branch for the Supabase & Riverpod free minicourse on YouTube. Checkout the "starter" branch for the base setup of the course._
